@@ -25,9 +25,9 @@ public class DialogFlowInit {
     AIRequest aiRequest;
     AIDataService aiDataService;
     AIService aiService;
-    String CLIENT_ACCESS_TOKEN = "";
+
     public DialogFlowInit(Context context){
-        final AIConfiguration config = new AIConfiguration(CLIENT_ACCESS_TOKEN,
+        final AIConfiguration config = new AIConfiguration(DialogFlowContext.CLIENT_ACCESS_TOKEN,
                 AIConfiguration.SupportedLanguages.English,
                 AIConfiguration.RecognitionEngine.System);
         aiService = AIService.getService(context, config);
