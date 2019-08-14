@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">SpeakToGO</string>
+    <string name="this_is_speak_to_go">這裡是Speak to Go 請問你要去哪裡?</string>
+
+
+    <string name="wifistatus">Ｗifi Status：</string>
+    <string name="wifiname">Wifi Name(SSID)：</string>
+    <string name="wifipassword">Wifi PASSWD(PASSWD)：</string>
+    <string name="wifishowpassword">Show PASSWD(SHOWPW)：</string>
+    <string name="wifisecuritytype">(TYPE)：</string>
+    <string name="wificonnect">(CONNECT)</string>
+    <string name="wifititle">wifi connect error</string>
+    <string name="wifioffmassage">本功能需開啟無線網路才可進行下一步設定, 請確認是否要開啟無線網路?\n(Is turn on the wifi ?)</string>
+</resources>
