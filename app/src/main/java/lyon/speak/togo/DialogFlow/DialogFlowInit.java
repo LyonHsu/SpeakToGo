@@ -13,6 +13,7 @@ import ai.api.model.AIError;
 import ai.api.model.AIRequest;
 import ai.api.model.AIResponse;
 import ai.api.model.Result;
+import ai.api.model.Status;
 
 /**
  * Ref :
@@ -68,13 +69,28 @@ public class DialogFlowInit {
         Log.d(TAG,"DialogFlowResponse : "+aiResponse);
 
         final Result result = aiResponse.getResult();
-        final String speech = result.getFulfillment().getSpeech();
-        Log.i(TAG, "DialogFlowResponse Speech: " + speech);
-        DialogFlowSpeech(speech);
 
-        String action = result.getAction();
-        Log.i(TAG, "DialogFlowResponse Action: " + action);
-        DialogFlowAction(action);
+        final Status status = aiResponse.getStatus();
+        int statusCode = status.getCode();
+        Log.i(TAG, "DialogFlowResponse Status code: " + statusCode);
+        String errorType= status.getErrorType();
+        Log.i(TAG, "DialogFlowResponse Status type: " +errorType);
+        String errorDetails = status.getErrorDetails();
+        Log.i(TAG, "DialogFlowResponse Status errorDetails: " +errorDetails);
+
+        if(statusCode==200) {
+            final String speech = result.getFulfillment().getSpeech();
+            Log.i(TAG, "DialogFlowResponse Speech: " + speech);
+            DialogFlowSpeech(speech);
+
+            String action = result.getAction();
+            Log.i(TAG, "DialogFlowResponse Action: " + action);
+            DialogFlowAction(action);
+        }else{
+            String sss = "Code:"+statusCode+" , errorDetails:"+errorDetails;
+                    DialogFlowSpeech(sss);
+            Log.e(TAG,"DialogFlowResponse Error "+sss);
+        }
     }
 
     public void DialogFlowSpeech(String speech){

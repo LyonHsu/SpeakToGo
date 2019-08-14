@@ -81,9 +81,9 @@ public class NetWork extends RelativeLayout {
         if(IPTxt!=null)
             IPTxt.setText(ip);
         if(ip.equals(ipp)){
-            netWorkIcon.setImageDrawable(context.getResources().getDrawable(android.R.drawable.star_big_off));
+            netWorkIcon.setImageDrawable(context.getResources().getDrawable(R.drawable.icon_gr));
         }else{
-            netWorkIcon.setImageDrawable(context.getResources().getDrawable(android.R.drawable.star_big_on));
+            netWorkIcon.setImageDrawable(context.getResources().getDrawable(R.drawable.icon_ge));
         }
 
         Log.e(TAG, "20190610 ***** IP="+ ip);

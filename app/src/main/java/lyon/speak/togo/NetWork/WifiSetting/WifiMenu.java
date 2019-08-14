@@ -79,9 +79,11 @@ public class WifiMenu extends Activity {
         reButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                wifiSetting.wifiscan();
-                if(mAdapter!=null)
-                    mAdapter.notifyDataSetChanged();
+                if(wifiSetting!=null) {
+                    wifiSetting.wifiscan();
+                    if (mAdapter != null)
+                        mAdapter.notifyDataSetChanged();
+                }
             }
         });
 
@@ -152,7 +154,9 @@ public class WifiMenu extends Activity {
 
 
     private void checkWifiStatus(){
-        if (wifiSetting.getwifistatus()){
+        boolean wifistatus = wifiSetting.getwifistatus();
+        Log.d(TAG,"checkWifiStatus() wifistatus:"+wifistatus);
+        if (wifistatus){
             checkWifiPermissionStatus();
         }else{
             Alert.showAlert(WifiMenu.this, getString(R.string.wifititle), getString(R.string.wifioffmassage), "安安");
@@ -161,9 +165,12 @@ public class WifiMenu extends Activity {
     }
 
     private void checkWifiPermissionStatus(){
+        Log.d(TAG,"checkWifiPermissionStatus()");
         Permission permission = new Permission();
         if (permission.checBluetoothPermission(WifiMenu.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION})) {
-            mAdapter = new RecyclerAdapter(wifiSetting.wifiscan());//这里的getyourDatas()返回的是String类型的数组
+            List<ScanResult> list = wifiSetting.wifiscan();
+            Log.d(TAG,"checkWifiPermissionStatus wifi scan num:"+list.size());
+            mAdapter = new RecyclerAdapter(list);//这里的getyourDatas()返回的是String类型的数组
             Recycler.setAdapter(mAdapter);
             mAdapter.setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
                 @RequiresApi(api = Build.VERSION_CODES.M)
@@ -213,6 +220,8 @@ public class WifiMenu extends Activity {
                     Toast.makeText(WifiMenu.this,"longclick:"+position, Toast.LENGTH_SHORT).show();
                 }
             });
+        }else{
+            Log.e(TAG,"no Permission");
         }
     }
 

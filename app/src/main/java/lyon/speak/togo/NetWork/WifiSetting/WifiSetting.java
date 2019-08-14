@@ -28,7 +28,11 @@ public class WifiSetting {
 
     @SuppressLint("WrongConstant")
     public void initWifi(Context context) {
-        if (context != null) {wifiManager = (WifiManager) context.getSystemService(WIFI_SERVICE);}
+        if (context != null) {
+            wifiManager = (WifiManager) context.getSystemService(WIFI_SERVICE);
+        }else{
+            Log.e(TAG,"initWifi fail context = null");
+        }
     }
 
     public boolean getwifistatus() {
